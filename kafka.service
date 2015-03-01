@@ -14,4 +14,4 @@ ExecStart=/usr/bin/docker run --name kafka -e CONSUL_URL=$COREOS_PUBLIC_IPV4:850
 WantedBy=multi-user.target
 
 [X-Fleet]
-Global=true
+MachineMetadata=role=kafka
