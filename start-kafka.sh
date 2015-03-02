@@ -23,8 +23,11 @@ if [[ -z "$KAFKA_ZOOKEEPER_CONNECT" ]]; then
     prop='Address'
     address=`jsonval`
 
-    export KAFKA_ZOOKEEPER_CONNECT=$(echo ${address}:${port%?})
+    echo $address
+    echo ${port%?}
 
+    export KAFKA_ZOOKEEPER_CONNECT=$(echo ${address}:${port%?}) 
+    echo "Connect address"
     echo $KAFKA_ZOOKEEPER_CONNECT
 fi
 
