@@ -5,13 +5,10 @@ After=zookeeper.service
 [Service]
 TimeoutStartSec=0
 EnvironmentFile=/etc/environment
-ExecStartPre=-/usr/bin/docker kill kafka
-ExecStartPre=-/usr/bin/docker rm kafka
+ExecStartPre=-/usr/bin/docker kill kafka-%i
+ExecStartPre=-/usr/bin/docker rm kafka-%i
 ExecStartPre=/usr/bin/docker pull 7imbrook/kafka-docker
-ExecStart=/usr/bin/docker run --name kafka -e CONSUL_URL=${COREOS_PUBLIC_IPV4} -v /var/run/docker.sock:/var/run/docker.sock -p 9092 7imbrook/kafka-docker
-
-[Install]
-WantedBy=multi-user.target
+ExecStart=/usr/bin/docker run -h ${COREOS_PUBLIC_IPV4} --name kafka-%i -e CONSUL_URL=${COREOS_PUBLIC_IPV4} -e ID=%i -v /var/run/docker.sock:/var/run/docker.sock -p 9092 7imbrook/kafka-docker
 
 [X-Fleet]
 MachineMetadata=size=LG
