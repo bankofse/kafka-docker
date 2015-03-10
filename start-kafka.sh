@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ -z "$KAFKA_ADVERTISED_PORT" ]]; then
-    export KAFKA_ADVERTISED_PORT="$(docker port kafka-$ID 9092 | sed -r "s/.*:(.*)/\1/g")"
+    export KAFKA_ADVERTISED_PORT="$(docker port kafka_1 9092 | sed -r "s/.*:(.*)/\1/g")"
 fi
 if [[ -z "$KAFKA_BROKER_ID" ]]; then
     export KAFKA_BROKER_ID=$KAFKA_ADVERTISED_PORT
